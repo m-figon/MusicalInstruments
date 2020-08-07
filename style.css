@@ -40,3 +40,63 @@ body{
     text-decoration: none;
     color: white;
 }
+.instruments{
+    display: grid;
+    grid-template-columns: auto auto auto auto auto;
+}
+.main{
+    width:100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 2rem;
+}
+.main-display{
+    width:70%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+#title{
+    font-size: 3rem;
+    width:85%;
+    text-align: start;
+}
+.instrument{
+    width:13rem;
+    height:18rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 1rem 1rem;
+}
+.instrument img{
+    height:10rem;
+    width: 10rem;
+}
+.instrument h1{
+    padding: 0 1rem;
+    font-size: 1.0rem;
+    text-transform: uppercase;
+    margin:0;
+}
+.instrument h2{
+    font-size: 1.4rem;
+    color: green;
+}
+.one-line{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width:100%;
+}
+.one-line h2{
+    padding: 0 1rem;
+}
+.one-line img{
+    margin-left: 0.5rem;
+    width:1.5rem;
+    height:1.5rem;
+}

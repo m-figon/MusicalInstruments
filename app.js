@@ -3,18 +3,24 @@ let app = angular.module('app', ['ngRoute']);
 app.config(['$routeProvider', ($routeProvider) => {
     $routeProvider
         .when('/home', {
-            template: 'home.html',
+            template: 'index.html',
             controller: 'app-controller'
 
         })
-        .when('/instruments', {
-            template: 'instruments.html',
+        .when('/instruments/guitars', {
+            template: 'views/instruments.html',
             controller: 'app-controller'
+        })
+        .otherwise({
+          redirectTo: '/home'
         })
 }])
 
 app.controller('app-controller', ['$scope','$http',($scope,$http) => {
     $scope.message = "hello";
+}])
+
+app.controller('instrument-controller', ['$scope','$http',($scope,$http) => {
     $scope.instruments = [];
     $http.get('https://rocky-citadel-32862.herokuapp.com/MusicalInstruments/instruments').then((data)=>{
         $scope.instruments=data;
