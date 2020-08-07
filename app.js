@@ -7,12 +7,17 @@ app.config(['$routeProvider', ($routeProvider) => {
             controller: 'app-controller'
 
         })
-        .when('/guitars', {
-            template: 'guitars.html',
+        .when('/instruments', {
+            template: 'instruments.html',
             controller: 'app-controller'
         })
 }])
 
-app.controller('app-controller', ($scope) => {
+app.controller('app-controller', ['$scope','$http',($scope,$http) => {
     $scope.message = "hello";
-})
+    $scope.instruments = [];
+    $http.get('https://rocky-citadel-32862.herokuapp.com/MusicalInstruments/instruments').then((data)=>{
+        $scope.instruments=data;
+        console.log($scope.instruments.data);
+    })
+}])

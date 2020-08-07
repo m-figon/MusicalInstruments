@@ -11,22 +11,13 @@
 
 <body ng-app="app">
   <div class="app" ng-controller="app-controller">
-    <div class="nav-bar">
-      <div class="nav-bar-content">
-        <div class="left">
-          <img src="logo.png">
-          <h1>Guitars</h1>
-          <h1>Basses</h1>
-          <h1>Keyboards</h1>
-          <h1>Drums</h1>
-        </div>
-        <div class="right">
-          <h1>Cart</h1>
-        </div>
-      </div>
-      
-    </div>
-    <h1>Guitars</h1>
+       <ng-include src="'nav-bar.html'"></ng-include>
+       <div class="guitars">
+        <h1>Guitars</h1>
+        <div class="guitar" ng-repeat="instrument in instruments.data">
+          <h1>{{instrument.name}}</h1>
+        </div>"
+       </div>
   </div>
   <script src="angularjs.js"></script>
   <script src="angularjs-route.js"></script>
