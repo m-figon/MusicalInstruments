@@ -1,0 +1,36 @@
+body{
+    margin:0;
+    font-family: 'Lato', sans-serif;
+}
+.nav-bar{
+    background-color: black;
+    color:white;
+    width: 100vw;
+    height:5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.nav-bar-content{
+    width:80%;
+    height:100%;
+    display: flex;
+}
+.left,.right{
+    width:50%;
+    height:100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.left h1{
+    margin: 0 0.5rem;
+    font-size: 1.5rem;
+}
+.right h1{
+    font-size: 1.5rem;
+}
+.left img{
+    height:3rem;
+    width:3rem;
+}
