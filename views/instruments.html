@@ -1,22 +1,10 @@
-<!DOCTYPE html>
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-  <meta charset="utf-8" />
-  <link rel="stylesheet" href="style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap" rel="stylesheet">
-  <title>Musical Instruments</title>
-</head>
-
-<body ng-app="app">
   <div class="app" ng-controller="instrument-controller">
-    <ng-include src="'nav-bar.html'"></ng-include>
     <div class="main">
       <div class="main-display">
-        <h2 id="title">Guitars</h2>
+        <h2 id="title">{{instrumentType}}</h2>
         <div class="instruments">
-          <div class="instrument" ng-repeat="instrument in instruments.data" ng-show="instrument.instrument==='guitar'">
+          <div class="instrument" ng-repeat="instrument in instruments.data" ng-show="instrument.instrument===instrumentType">
             <img ng-src="{{instrument.img}}">
             <h1>{{instrument.name}}</h1>
             <div class="one-line">
@@ -28,11 +16,3 @@
       </div>
     </div>
   </div>
-  <script src="angularjs.js"></script>
-  <script src="angularjs-route.js"></script>
-  <script src="app.js"></script>
-
-</body>
-
-
-</html>

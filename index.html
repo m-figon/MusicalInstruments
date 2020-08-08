@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="app">
 
 <head>
   <meta charset="utf-8" />
@@ -9,10 +9,10 @@
   <title>Musical Instruments</title>
 </head>
 
-<body ng-app="app">
-  <div class="app" ng-controller="app-controller">
+<body ng-controller="app-controller">
+  <div class="app">
     <ng-include src="'nav-bar.html'"></ng-include>
-    <h1>{{message}}</h1>
+    <main ng-view></main>
   </div>
   <script src="angularjs.js"></script>
   <script src="angularjs-route.js"></script>
