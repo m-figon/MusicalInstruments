@@ -2,39 +2,45 @@ body{
     margin:0;
     font-family: 'Lato', sans-serif;
 }
-
+a{
+    text-decoration: none;
+}
 .nav-bar{
     background-color: black;
     color:white;
     width: 100vw;
-    height:5rem;
+    height:4rem;
     display: flex;
     justify-content: center;
     align-items: center;
+    border-bottom:  3px solid rgb(255, 115, 0);
 }
 
 .nav-bar-content{
-    width:80%;
+    width:60%;
     height:100%;
     display: flex;
 }
-.left,.right{
-    width:50%;
+.left,.right,.middle{
+    width:33%;
     height:100%;
     display: flex;
     justify-content: center;
     align-items: center;
 }
-.left h1{
+.left h1,
+.middle h1{
     margin: 0 0.5rem;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
 }
 .right h1{
-    font-size: 1.5rem;
+    font-size: 1.2rem;
 }
 .left img{
-    height:3rem;
-    width:3rem;
+    margin-top: 1rem;
+    transform: rotate(-30deg);
+    height:7rem;
+    width:7rem;
 }
 .nav-bar-content a{
     text-decoration: none;
@@ -44,14 +50,16 @@ body{
     display: grid;
     grid-template-columns: auto auto auto auto auto;
 }
-.main{
+.main,
+.details{
     width:100vw;
     display: flex;
     align-items: center;
     justify-content: center;
     padding-top: 2rem;
 }
-.main-display{
+.main-display,
+.details-display{
     width:70%;
     display: flex;
     justify-content: center;
@@ -80,6 +88,7 @@ body{
     padding: 0 1rem;
     font-size: 1.0rem;
     text-transform: uppercase;
+    color:black;
     margin:0;
 }
 .instrument h2{
@@ -99,4 +108,80 @@ body{
     margin-left: 0.5rem;
     width:1.5rem;
     height:1.5rem;
+}
+.details-display h2{
+    font-size: 2rem;
+    text-align: center;
+    text-transform: uppercase;
+    width:100%;
+    border-bottom: 3px solid red;
+}
+.line{
+    display: flex;
+    width:100%;
+    align-items: center;
+}
+.line .left,
+.line .right,
+.line .price-left{
+    width:50%;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+.line .right{
+    align-items: flex-start;
+    padding: 0 2rem;
+}
+#left-border{
+    border-left: 1px solid rgb(218, 218, 218);
+}
+.line .right h1{
+    font-size: 1.2rem;
+    margin:1rem 0;
+}
+.line .left img{
+    width: 25rem;
+    height: 25rem;
+}
+.line h2{
+    border: 0;
+    font-size: 1.5rem;
+}
+.green-cart{
+    width:12rem;
+    height:4rem;
+    display: flex;
+    align-items: center;
+    padding: 0 2rem;
+    background-color: #679d00;
+}
+.green-cart img{
+    height:2rem;
+    width: 2rem;
+    margin-right: 1rem;
+    -webkit-filter: invert(100%); /* Safari/Chrome */
+    filter: invert(100%);
+}
+.green-cart h1{
+    color:white;
+    font-size: 1rem;
+}
+.line .price-left{
+    flex-direction: row;
+}
+.price-left h1{
+    font-size: 1.2rem;
+    color: green;
+    text-transform: lowercase;
+}
+.price-left h2{
+    margin-left: 0.5rem;
+    font-size: 2rem;
+    color:green;
+    width: auto;
+}
+.green-cart:hover{
+    cursor: pointer;
 }

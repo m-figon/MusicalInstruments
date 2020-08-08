@@ -1,12 +1,12 @@
 
-  <div class="app" ng-controller="instrument-controller">
+  <div class="app" ng-controller="instruments-controller">
     <div class="main">
       <div class="main-display">
         <h2 id="title">{{instrumentType}}</h2>
         <div class="instruments">
           <div class="instrument" ng-repeat="instrument in instruments.data" ng-show="instrument.instrument===instrumentType">
             <img ng-src="{{instrument.img}}">
-            <h1>{{instrument.name}}</h1>
+            <a ng-href="#!/instruments/{{instrumentType}}/{{instrument.id}}"><h1>{{instrument.name}}</h1></a>
             <div class="one-line">
               <h2>{{instrument.price}} €</h2>
               <img src="cart.png">

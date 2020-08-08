@@ -1,0 +1,32 @@
+
+  <div class="app" ng-controller="instrument-controller">
+    <div class="details">
+      <div class="details-display">
+        <h2>{{instrument.name}}</h2>
+        <div class="line">
+            <div class="left">
+                <img ng-src="{{instrument.img}}">
+            </div>
+            <div class="right" id="left-border">
+                <h2>Description</h2>
+                <h1>Instrument: {{instrument.instrument}}</h1>
+                <h1>Color: {{instrument.color}}</h1>
+                <h1>Type: {{instrument.type}}</h1>
+                <h1>Brand: {{instrument.brand}}</h1>
+                <p>{{instrument.description}}</p>
+            </div>
+        </div>
+        <div class="line">
+            <div class="price-left">
+                <h1>Price</h1>
+                <h2>{{instrument.price}} €</h2>
+            </div>
+            <div class="right">
+                <div class="green-cart">
+                    <img src="cart.png">
+                    <h1>Add to cart</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
