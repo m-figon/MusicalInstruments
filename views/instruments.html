@@ -11,10 +11,16 @@
             <option value="inc">Price increasing</option>
             <option value="dec">Price decreasing</option>
           </select>
+          <select ng-model="type" ng-change="typeFunc()">
+            <option value="none">Type</option>
+            <option ng-repeat="type in types" ng-value="type">
+              {{type}}
+            </option>
+          </select>
           <input ng-focus="focusFunc()" ng-blur="blurFunc()" ng-model="search">
         </div>
         <div class="instruments">
-          <div class="instrument" ng-repeat="instrument in instruments" ng-show="(instrument.name.toLowerCase().includes(search.toLowerCase()) || search==='Search...')">
+          <div class="instrument" ng-repeat="instrument in instruments | orderBy:order" ng-show="(instrument.name.toLowerCase().includes(search.toLowerCase()) || search==='Search...')">
             <img ng-src="{{instrument.img}}">
             <a ng-href="#!/instruments/{{instrumentType}}/{{instrument.id}}"><h1>{{instrument.name}}</h1></a>
             <div class="one-line">
