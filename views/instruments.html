@@ -2,9 +2,19 @@
   <div class="app" ng-controller="instruments-controller">
     <div class="main">
       <div class="main-display">
-        <h2 id="title">{{instrumentType}}</h2>
+        <div class="filters-line">
+          <h2>{{instrumentType}}</h2>
+          <select ng-model="filter" ng-change="selectFunc()">
+            <option value="none">Sort by</option>
+            <option value="a-z">Name A-Z</option>
+            <option value="z-a">Name Z-A</option>
+            <option value="inc">Price increasing</option>
+            <option value="dec">Price decreasing</option>
+          </select>
+          <input ng-focus="focusFunc()" ng-blur="blurFunc()" ng-model="search">
+        </div>
         <div class="instruments">
-          <div class="instrument" ng-repeat="instrument in instruments.data" ng-show="instrument.instrument===instrumentType">
+          <div class="instrument" ng-repeat="instrument in instruments" ng-show="(instrument.name.toLowerCase().includes(search.toLowerCase()) || search==='Search...')">
             <img ng-src="{{instrument.img}}">
             <a ng-href="#!/instruments/{{instrumentType}}/{{instrument.id}}"><h1>{{instrument.name}}</h1></a>
             <div class="one-line">
