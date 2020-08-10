@@ -17,10 +17,54 @@ app.config(['$routeProvider', ($routeProvider) => {
 }])
 
 app.controller('app-controller', ['$scope', '$http', ($scope, $http) => {
-    $scope.message = "hello";
+    $scope.login = false;
+    $scope.loginFunc = (value) =>{
+      $scope.login = value;
+      console.log($scope.login);
+    }
 }])
 
-
+app.controller('login-controller', ['$scope', '$http', ($scope, $http) => {
+  $scope.users =[];
+  $scope.account="Account Name";
+  $scope.password="Password";
+  $scope.type="text";
+  $http.get('https://rocky-citadel-32862.herokuapp.com/MusicalInstruments/users').then((data) => {
+      $scope.users = data.data;
+      console.log($scope.users);
+    })
+  $scope.focusFunc = (e,condition) =>{
+    if(e.target.value==="Account Name" || e.target.value==="Password"){
+      e.target.value="";
+      if(condition){
+        $scope.type="password";
+      }
+    }
+  }
+  $scope.blurFunc = (e,condition,value) =>{
+    if(e.target.value===""){
+      e.target.value=value;
+      if(condition){
+        $scope.type="text";
+      }
+    }
+  }
+  $scope.signIn = () =>{
+    let correctFlag = false;
+    for(let item of $scope.users){
+      if(item.account===$scope.account && item.password===$scope.password){
+        alert('correct user data');
+        correctFlag=true;
+        $scope.account="Account Name";
+        $scope.password="Password";
+        $scope.type="text";
+      }
+    }
+    if(!correctFlag){
+        alert('wrong user data');
+    }
+  }
+}])
 
 app.controller('instruments-controller', ['$scope', '$routeParams', '$http', ($scope, $routeParams, $http) => {
     $scope.instrumentType = $routeParams.type;

@@ -1,0 +1,13 @@
+<div class="login" ng-show="login" ng-controller="login-controller">
+    <div class="login-content">
+        <div class="login-form">
+            <div class="x">
+                <button ng-click="loginFunc(false)">X</button>
+            </div>
+            <input ng-model="account" ng-focus="focusFunc($event,false)" ng-blur="blurFunc($event,false,'Account Name')">
+            <input ng-model="password" ng-focus="focusFunc($event,true)"  type="{{type}}" ng-blur="blurFunc($event,true,'Password')">
+            <button ng-click="signIn()">Login</button>
+            <h1>Don't have an account? create it!</h1>
+        </div>
+    </div>
+</div>

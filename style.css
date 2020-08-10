@@ -234,3 +234,84 @@ a{
     border: 1px solid gray;
     margin-right: 2rem;
 }
+.login{
+    position: absolute;
+    top:0;
+    left:0;
+    width:100vw;
+    height:100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index:3;
+}
+.login-content{
+    width:25rem;
+    background-color: white;
+    border:0;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.login-form{
+    width:70%;
+    height:80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+.login-form input{
+    width:15rem;
+    height:1.5rem;
+    background-color: rgb(230, 230, 230);
+    border: 1px solid black;
+    margin-bottom:1rem;
+    border-radius:5px;
+    padding: 0 0.5rem;  
+}
+.login-form input:focus{
+    background-color:white;
+
+}
+.login-form h1{
+    font-size: 1.2rem;
+    text-decoration: underline;
+    margin-bottom:1rem;
+}
+.x{
+    margin: 1rem 0;
+    width:100%;
+    display: flex;
+    justify-content: flex-end;
+}
+.login-form button{
+    width:4rem;
+    height:1.7rem;
+    background-color: orangered;
+    color:white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.0rem;
+    border: 1px solid black;
+    border-radius:5px;  
+}
+.login-form button:hover{
+    cursor: pointer;
+    background-color: orange;
+}
+.x button{
+    width:1.5rem;
+    height:1.5rem;
+    background-color: orangered;
+    color:white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    border: 1px solid black;
+    border-radius:5px;
+}
