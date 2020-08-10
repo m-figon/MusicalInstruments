@@ -24,10 +24,10 @@
             <img ng-src="{{instrument.img}}">
             <a ng-href="#!/instruments/{{instrumentType}}/{{instrument.id}}"><h1>{{instrument.name}}</h1></a>
             <div class="one-line">
-              <h2>{{instrument.price}} €</h2>
-              <img src="cart.png">
+              <h2>{{instrument.price | currency: '€'}} </h2>
+              <img ng-show="logedAc!==''" ng-click="addToCart(instrument)" src="cart.png">
             </div>
-          </div>"
+          </div>
         </div>
       </div>
     </div>

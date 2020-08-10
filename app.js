@@ -11,6 +11,9 @@ app.config(['$routeProvider', ($routeProvider) => {
     .when('/instruments/:type/:id', {
       templateUrl: 'views/details.html'
     })
+    .when('/cart', {
+      templateUrl: "views/cart.html"
+    })
     .otherwise({
       redirectTo: '/home'
     })
@@ -20,16 +23,86 @@ app.controller('app-controller', ['$scope', '$http', ($scope, $http) => {
   $scope.login = false;
   $scope.register = false;
   $scope.logedAc = "";
+  $scope.cartSum = null;
+  $scope.cart = null;
+  $scope.logedUser = null;
   $scope.loginShow = (value) => {
     $scope.login = value;
   }
   $scope.registerShow = (value) => {
     $scope.register = value;
   }
+  $scope.deleteItem = (value) => {
+    $scope.cart.splice(value, 1);
+    $http.get('https://rocky-citadel-32862.herokuapp.com/MusicalInstruments/users').then((data) => {
+      $scope.users = data.data;
+      for (let item of $scope.users) {
+        if (item.account === $scope.logedAc) {
+          $scope.logedUser = item;
+        }
+      }
+      $http.put('https://rocky-citadel-32862.herokuapp.com/MusicalInstruments/users/' + $scope.logedUser.id, {
+        account: $scope.logedUser.account,
+        email: $scope.logedUser.email,
+        password: $scope.logedUser.password,
+        cart: $scope.cart,
+        id: $scope.logedUser.id
+      })
+    })
+
+  }
   $scope.loginFunc = (value) => {
     $scope.logedAc = value;
+    $http.get('https://rocky-citadel-32862.herokuapp.com/MusicalInstruments/users').then((data) => {
+      let users = data.data;
+      console.log(users);
+      for (let item of users) {
+        if (item.account === $scope.logedAc) {
+          $scope.cart = item.cart;
+          $scope.cartSum = 0;
+          console.log($scope.cart);
+          for (let elem of $scope.cart) {
+            $scope.cartSum += parseFloat(elem.price);
+          }
+        }
+      }
+    })
+  }
+  $scope.addToCart = (value) => {
+    console.log(value);
+    $http.get('https://rocky-citadel-32862.herokuapp.com/MusicalInstruments/users').then((data) => {
+      $scope.users = data.data;
+      let cart;
+      for (let item of $scope.users) {
+        if (item.account === $scope.logedAc) {
+          $scope.logedUser = item;
+          $scope.cart = item.cart;
+        }
+      }
+      cart = $scope.logedUser.cart.slice();
+      cart.push(value);
+      $http.put('https://rocky-citadel-32862.herokuapp.com/MusicalInstruments/users/' + $scope.logedUser.id, {
+        account: $scope.logedUser.account,
+        email: $scope.logedUser.email,
+        password: $scope.logedUser.password,
+        cart: cart,
+        id: $scope.logedUser.id
+      }).then(() => {
+        $http.get('https://rocky-citadel-32862.herokuapp.com/MusicalInstruments/users').then((data) => {
+          $scope.users = data.data;
+          let cart;
+          for (let item of $scope.users) {
+            if (item.account === $scope.logedAc) {
+              $scope.logedUser = item;
+              $scope.cart = item.cart;
+            }
+          }
+        })
+      })
+    })
   }
 }])
+
 
 app.controller('login-controller', ['$scope', '$http', ($scope, $http) => {
   $scope.users = [];
@@ -85,10 +158,10 @@ app.controller('register-controller', ['$scope', '$http', ($scope, $http) => {
   $scope.password2 = "Confirm Password";
   $scope.type1 = "text";
   $scope.type2 = "text";
-  $scope.accountP=false;
-  $scope.emailP=false;
-  $scope.password1P=false;
-  $scope.password2P=false;
+  $scope.accountP = false;
+  $scope.emailP = false;
+  $scope.password1P = false;
+  $scope.password2P = false;
   $scope.focusFunc = (e, condition) => {
     if (e.target.value === "Account Name" || e.target.value === "Password" || e.target.value === "Email Address" || e.target.value === "Confirm Password") {
       e.target.value = "";
@@ -110,45 +183,46 @@ app.controller('register-controller', ['$scope', '$http', ($scope, $http) => {
     }
   }
   $scope.signUp = () => {
-    let correctFlag=true;
-    if(!($scope.account.match(/^[a-zA-Z0-9\.\-_]{4,10}$/) === null)){
-      $scope.accountP=false;
-    }else{
-      correctFlag=false;
-      $scope.accountP=true;
-      }
-    if(!($scope.email.match(/^[a-z0-9\._\-]+@[a-z0-9\.\-]+\.[a-z]{2,4}$/) ===
-    null)){
-      $scope.emailP=false;
-    }else{
-      correctFlag=false;
-      $scope.emailP=true;
+    let correctFlag = true;
+    if (!($scope.account.match(/^[a-zA-Z0-9\.\-_]{4,10}$/) === null)) {
+      $scope.accountP = false;
+    } else {
+      correctFlag = false;
+      $scope.accountP = true;
     }
-    if(!($scope.password1.match(
+    if (!($scope.email.match(/^[a-z0-9\._\-]+@[a-z0-9\.\-]+\.[a-z]{2,4}$/) ===
+      null)) {
+      $scope.emailP = false;
+    } else {
+      correctFlag = false;
+      $scope.emailP = true;
+    }
+    if (!($scope.password1.match(
       /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[\.\-_@$!%*#?&])[A-Za-z\d\.\-_@$!%*#?&]{8,13}$/
-    ) === null)){
-      $scope.password1P=false;
-    }else{
-      correctFlag=false;
-      $scope.password1P=true;
+    ) === null)) {
+      $scope.password1P = false;
+    } else {
+      correctFlag = false;
+      $scope.password1P = true;
     }
-    if($scope.password1 === $scope.password2 &&
+    if ($scope.password1 === $scope.password2 &&
       !(
         $scope.password1.match(
           /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[\.\-_@$!%*#?&])[A-Za-z\d\.\-_@$!%*#?&]{8,13}$/
         ) === null
-      )){
-        $scope.password2P=false;
-      }else{
-      correctFlag=false;
-      $scope.password2P=true;
+      )) {
+      $scope.password2P = false;
+    } else {
+      correctFlag = false;
+      $scope.password2P = true;
     }
-    if(correctFlag){
-      $http.post('https://rocky-citadel-32862.herokuapp.com/MusicalInstruments/users',{
+    if (correctFlag) {
+      $http.post('https://rocky-citadel-32862.herokuapp.com/MusicalInstruments/users', {
         account: $scope.account,
         email: $scope.email,
-        password: $scope.password1
-      }).then(()=>{
+        password: $scope.password1,
+        cart: []
+      }).then(() => {
         alert('user created');
         $scope.account = "Account Name";
         $scope.email = "Email Address";

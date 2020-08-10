@@ -19,10 +19,10 @@
         <div class="line">
             <div class="price-left">
                 <h1>Price</h1>
-                <h2>{{instrument.price}} €</h2>
+                <h2>{{instrument.price | currency: '€'}} </h2>
             </div>
             <div class="right">
-                <div class="green-cart">
+                <div ng-click="addToCart(instrument)" ng-show="logedAc!==''" class="green-cart">
                     <img src="cart.png">
                     <h1>Add to cart</h1>
                 </div>
