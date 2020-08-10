@@ -29,6 +29,9 @@ a{
     justify-content: center;
     align-items: center;
 }
+.nav-bar h1:hover{
+    cursor: pointer;
+}
 .left h1,
 .middle h1{
     margin: 0 0.5rem;
@@ -234,7 +237,8 @@ a{
     border: 1px solid gray;
     margin-right: 2rem;
 }
-.login{
+.login,
+.register{
     position: absolute;
     top:0;
     left:0;
@@ -246,8 +250,9 @@ a{
     justify-content: center;
     z-index:3;
 }
-.login-content{
-    width:25rem;
+.login-content,
+.register-content{
+    width:27rem;
     background-color: white;
     border:0;
     border-radius: 10px;
@@ -255,7 +260,8 @@ a{
     align-items: center;
     justify-content: center;
 }
-.login-form{
+.login-form,
+.register-form{
     width:70%;
     height:80%;
     display: flex;
@@ -263,7 +269,8 @@ a{
     justify-content: flex-start;
     align-items: flex-start;
 }
-.login-form input{
+.login-form input,
+.register-form input{
     width:15rem;
     height:1.5rem;
     background-color: rgb(230, 230, 230);
@@ -272,14 +279,19 @@ a{
     border-radius:5px;
     padding: 0 0.5rem;  
 }
-.login-form input:focus{
+.login-form input:focus,
+.register-form input:focus{
     background-color:white;
 
 }
-.login-form h1{
+.login-form h1,
+.register-form h1{
     font-size: 1.2rem;
     text-decoration: underline;
     margin-bottom:1rem;
+}
+.login-form h1:hover{
+    cursor: pointer;
 }
 .x{
     margin: 1rem 0;
@@ -287,7 +299,8 @@ a{
     display: flex;
     justify-content: flex-end;
 }
-.login-form button{
+.login-form button,
+.register-form button{
     width:4rem;
     height:1.7rem;
     background-color: orangered;
@@ -299,7 +312,12 @@ a{
     border: 1px solid black;
     border-radius:5px;  
 }
-.login-form button:hover{
+.register-form button{
+    width: 5rem;
+    margin-bottom: 2rem;
+}
+.login-form button:hover,
+.register-form button:hover{
     cursor: pointer;
     background-color: orange;
 }
@@ -314,4 +332,10 @@ a{
     font-size: 1.2rem;
     border: 1px solid black;
     border-radius:5px;
+}
+.login-content p,
+.register-content p{
+    margin:0;
+    margin-bottom: 1rem;
+    color: orangered;
 }
