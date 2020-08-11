@@ -14,12 +14,16 @@ app.config(['$routeProvider', ($routeProvider) => {
     .when('/cart', {
       templateUrl: "views/cart.html"
     })
+    .when('/ordering', {
+      templateUrl: "views/ordering.html"
+    })
     .otherwise({
       redirectTo: '/home'
     })
 }])
 
 app.controller('app-controller', ['$scope', '$http', ($scope, $http) => {
+  console.log($scope.cart);
   $scope.login = false;
   $scope.register = false;
   $scope.logedAc = "";
@@ -47,6 +51,22 @@ app.controller('app-controller', ['$scope', '$http', ($scope, $http) => {
         password: $scope.logedUser.password,
         cart: $scope.cart,
         id: $scope.logedUser.id
+      }).then(() => {
+        $http.get('https://rocky-citadel-32862.herokuapp.com/MusicalInstruments/users').then((data) => {
+          $scope.users = data.data;
+          let cart;
+          for (let item of $scope.users) {
+            if (item.account === $scope.logedAc) {
+              $scope.logedUser = item;
+              $scope.cart = item.cart;
+              $scope.cartSum = 0;
+              console.log($scope.cart);
+              for (let elem of $scope.cart) {
+                $scope.cartSum += parseFloat(elem.price);
+              }
+            }
+          }
+        })
       })
     })
 
@@ -95,6 +115,11 @@ app.controller('app-controller', ['$scope', '$http', ($scope, $http) => {
             if (item.account === $scope.logedAc) {
               $scope.logedUser = item;
               $scope.cart = item.cart;
+              $scope.cartSum = 0;
+              console.log($scope.cart);
+              for (let elem of $scope.cart) {
+                $scope.cartSum += parseFloat(elem.price);
+              }
             }
           }
         })
@@ -147,6 +172,59 @@ app.controller('login-controller', ['$scope', '$http', ($scope, $http) => {
     if (!correctFlag) {
       $scope.loginP = true;
       alert('wrong user data');
+    }
+  }
+}])
+
+app.controller('ordering-controller', ['$scope', '$http', ($scope, $http) => {
+  $scope.part = "1";
+  $scope.email = "Email Address";
+  $scope.city = "City Name";
+  $scope.street = "Street Name";
+  $scope.phone = "Phone Number";
+  $scope.emailP = false;
+  $scope.cityP = false;
+  $scope.streetP = false;
+  $scope.phoneP = false;
+  $scope.changingPart = (value) => {
+    let correctFlag = true;
+    if (!($scope.email.match(/^[a-z0-9\._\-]+@[a-z0-9\.\-]+\.[a-z]{2,4}$/) ===
+      null)) {
+      $scope.emailP = false;
+    } else {
+      correctFlag = false;
+      $scope.emailP = true;
+    }
+    if (!($scope.city.match(/^[a-zA-Z0-9\.\-_]{4,15}$/) === null)) {
+      $scope.cityP = false;
+    } else {
+      correctFlag = false;
+      $scope.cityP = true;
+    }
+    if (!($scope.street.match(/^[a-zA-Z0-9\.\-_]{4,15}$/) === null)) {
+      $scope.streetP = false;
+    } else {
+      correctFlag = false;
+      $scope.streetP = true;
+    }
+    if (!($scope.phone.match(/^[0-9]{9}$/) === null)) {
+      $scope.phoneP = false;
+    } else {
+      correctFlag = false;
+      $scope.phoneP = true;
+    }
+    if (correctFlag) {
+      $scope.part = value;
+    }
+  }
+  $scope.focusFunc = (e) => {
+    if (e.target.value === "Email Address" || e.target.value === "City Name" || e.target.value === "Street Name" || e.target.value === "Phone Number") {
+      e.target.value = "";
+    }
+  }
+  $scope.blurFunc = (e, value) => {
+    if (e.target.value === "") {
+      e.target.value = value;
     }
   }
 }])
