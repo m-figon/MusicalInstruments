@@ -50,6 +50,7 @@ app.controller('app-controller', ['$scope', '$http', ($scope, $http) => {
         email: $scope.logedUser.email,
         password: $scope.logedUser.password,
         cart: $scope.cart,
+        orders: $scope.logedUser.orders,
         id: $scope.logedUser.id
       }).then(() => {
         $http.get('https://rocky-citadel-32862.herokuapp.com/MusicalInstruments/users').then((data) => {
@@ -106,6 +107,7 @@ app.controller('app-controller', ['$scope', '$http', ($scope, $http) => {
         email: $scope.logedUser.email,
         password: $scope.logedUser.password,
         cart: cart,
+        orders: $scope.logedUser.orders,
         id: $scope.logedUser.id
       }).then(() => {
         $http.get('https://rocky-citadel-32862.herokuapp.com/MusicalInstruments/users').then((data) => {
@@ -187,6 +189,9 @@ app.controller('ordering-controller', ['$scope', '$http', ($scope, $http) => {
   $scope.streetP = false;
   $scope.phoneP = false;
   $scope.changingPart = (value) => {
+    $scope.part = value;
+  }
+  $scope.finishOrder = () => {
     let correctFlag = true;
     if (!($scope.email.match(/^[a-z0-9\._\-]+@[a-z0-9\.\-]+\.[a-z]{2,4}$/) ===
       null)) {
@@ -214,7 +219,28 @@ app.controller('ordering-controller', ['$scope', '$http', ($scope, $http) => {
       $scope.phoneP = true;
     }
     if (correctFlag) {
-      $scope.part = value;
+      let logedUser;
+      $http.get('https://rocky-citadel-32862.herokuapp.com/MusicalInstruments/users').then((data) => {
+        let users = data.data;
+        let orders;
+        console.log(users);
+        for (let item of users) {
+          if (item.account === $scope.logedAc) {
+            logedUser = item;
+          }
+        }
+        orders = logedUser.orders.slice();
+        orders.push({ date: new Date(), email: $scope.email, city: $scope.city, street: $scope.street, phone: $scope.phone, content: $scope.cart });
+        $http.put('https://rocky-citadel-32862.herokuapp.com/MusicalInstruments/users/' + logedUser.id, {
+          account: logedUser.account,
+          email: logedUser.email,
+          password: logedUser.password,
+          cart: logedUser.cart,
+          orders: orders,
+          id: logedUser.id
+        })
+      })
+      alert($scope.logedAc + 'order finished');
     }
   }
   $scope.focusFunc = (e) => {
@@ -299,7 +325,8 @@ app.controller('register-controller', ['$scope', '$http', ($scope, $http) => {
         account: $scope.account,
         email: $scope.email,
         password: $scope.password1,
-        cart: []
+        cart: [],
+        orders: []
       }).then(() => {
         alert('user created');
         $scope.account = "Account Name";

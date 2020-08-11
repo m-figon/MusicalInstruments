@@ -1,5 +1,5 @@
-<div class="ordering" ng-controller="ordering-controller">
-    <div class="ordering-content" ng-show="part==='1'">
+<div class="ordering" ng-show="logedAc!==''" ng-controller="ordering-controller">
+    <div class="ordering-content" ng-show="part==='2'">
         <div class="ordering-form">
             <h2>Contact Info</h2>
             <input ng-model="email" ng-focus="focusFunc($event)" ng-blur="blurFunc($event,'Email Address')">
@@ -10,10 +10,17 @@
             <p ng-show="streetP">Invalid street name</p>
             <input ng-model="phone" ng-focus="focusFunc($event)" ng-blur="blurFunc($event,'Phone Number')">
             <p ng-show="phoneP">Invalid phone number</p>
-            <button ng-click="changingPart('2')">Next</button>
+            <div class="ordering-line">
+                <div class="left-side">
+                    <button ng-click="changingPart('1')">Previous</button>
+                </div>
+                <div class="right-side">
+                    <button ng-click="finishOrder()">Finish</button>
+                </div>
+            </div>
         </div>
     </div>
-    <div class="ordering-content" ng-show="part==='2'">
+    <div class="ordering-content" ng-show="part==='1'">
         <div class="ordering-items">
             <div class="ordering-item" id="title-row">
                 <div class="item">
@@ -31,6 +38,9 @@
                 <div class="item">
                     <h1>Price</h1>
                 </div>
+                <div class="item">
+                    
+                </div>
             </div>
             <div class="ordering-item" ng-repeat="item in cart">
                 <div class="item">
@@ -46,19 +56,23 @@
                     <h1>{{item.brand}}</h1>
                 </div>
                 <div class="item">
-                    <h1>{{item.price}}</h1>
+                    <h1>{{item.price | currency: '€'}}</h1>
+                </div>
+                <div class="item">
+                    <button ng-click="deleteItem(key)" id='x'></button>
+                </div>
+            </div>
+            <div class="ordering-line">
+                <div class="left-side">
+                </div>
+                <div class="right-side">
+                    <button ng-click="changingPart('2')">Next</button>
                 </div>
             </div>
         </div>
-        <div class="ordering-line">
-            <div class="left-side">
-                <button ng-click="changingPart('1')">Previous</button>
-
-            </div>
-            <div class="right-side">
-                <button ng-click="changingPart('3')">Finish</button>
-
-            </div>
-        </div>
+        
     </div>
+</div>
+<div class="ordering" ng-show="logedAc===''">
+    <h2>You are not logged</h2>
 </div>
