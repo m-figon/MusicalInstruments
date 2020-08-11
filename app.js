@@ -17,6 +17,9 @@ app.config(['$routeProvider', ($routeProvider) => {
     .when('/ordering', {
       templateUrl: "views/ordering.html"
     })
+    .when('/orders', {
+      templateUrl: "views/orders.html"
+    })
     .otherwise({
       redirectTo: '/home'
     })
@@ -29,6 +32,7 @@ app.controller('app-controller', ['$scope', '$http', ($scope, $http) => {
   $scope.logedAc = "";
   $scope.cartSum = null;
   $scope.cart = null;
+  $scope.orders = null;
   $scope.logedUser = null;
   $scope.loginShow = (value) => {
     $scope.login = value;
@@ -60,6 +64,7 @@ app.controller('app-controller', ['$scope', '$http', ($scope, $http) => {
             if (item.account === $scope.logedAc) {
               $scope.logedUser = item;
               $scope.cart = item.cart;
+              $scope.orders = item.orders;
               $scope.cartSum = 0;
               console.log($scope.cart);
               for (let elem of $scope.cart) {
@@ -79,7 +84,9 @@ app.controller('app-controller', ['$scope', '$http', ($scope, $http) => {
       console.log(users);
       for (let item of users) {
         if (item.account === $scope.logedAc) {
+          $scope.logedUser = item;
           $scope.cart = item.cart;
+          $scope.orders = item.orders;
           $scope.cartSum = 0;
           console.log($scope.cart);
           for (let elem of $scope.cart) {
@@ -117,6 +124,7 @@ app.controller('app-controller', ['$scope', '$http', ($scope, $http) => {
             if (item.account === $scope.logedAc) {
               $scope.logedUser = item;
               $scope.cart = item.cart;
+              $scope.orders = item.orders;
               $scope.cartSum = 0;
               console.log($scope.cart);
               for (let elem of $scope.cart) {
@@ -178,7 +186,9 @@ app.controller('login-controller', ['$scope', '$http', ($scope, $http) => {
   }
 }])
 
-app.controller('ordering-controller', ['$scope', '$http', ($scope, $http) => {
+app.constant("moment", moment);
+
+app.controller('ordering-controller', ['$scope', '$http','moment', ($scope, $http,moment) => {
   $scope.part = "1";
   $scope.email = "Email Address";
   $scope.city = "City Name";
@@ -230,12 +240,17 @@ app.controller('ordering-controller', ['$scope', '$http', ($scope, $http) => {
           }
         }
         orders = logedUser.orders.slice();
-        orders.push({ date: new Date(), email: $scope.email, city: $scope.city, street: $scope.street, phone: $scope.phone, content: $scope.cart });
+        let tmpMoment = moment().format('L');
+        let tmpPrice=0;
+        for(let item of $scope.cart){
+          tmpPrice+=parseFloat(item.price);
+        }
+        orders.push({ date: tmpMoment, email: $scope.email, price: tmpPrice, city: $scope.city, street: $scope.street, phone: $scope.phone, content: $scope.cart });
         $http.put('https://rocky-citadel-32862.herokuapp.com/MusicalInstruments/users/' + logedUser.id, {
           account: logedUser.account,
           email: logedUser.email,
           password: logedUser.password,
-          cart: logedUser.cart,
+          cart: [],
           orders: orders,
           id: logedUser.id
         })

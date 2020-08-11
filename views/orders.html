@@ -1,0 +1,94 @@
+<div class="ordering" ng-show="logedAc!==''">
+    <div class="ordering-content">
+        <div class="ordering-items">
+            <div class="ordering-item" id="title-row">
+                <div class="item">
+                    <h1>Date</h1>
+                </div>
+                <div class="item">
+                    <h1>Email</h1>
+                </div>
+                <div class="item">
+                    <h1>City</h1>
+                </div>
+                <div class="item">
+                    <h1>Street</h1>
+                </div>
+                <div class="item">
+                    <h1>Phone</h1>
+                </div>
+                <div class="item">
+                    <h1>Item Quantity</h1>
+                </div>
+                <div class="item">
+                    <h1>Item Price</h1>
+                </div>
+            </div>
+            <div ng-repeat="item in orders">
+                <div class="ordering-item">
+                    <div class="item">
+                        <h1>{{item.date}}</h1>
+                    </div>
+                    <div class="item">
+                        <h1>{{item.email}}</h1>
+                    </div>
+                    <div class="item">
+                        <h1>{{item.city}}</h1>
+                    </div>
+                    <div class="item">
+                        <h1>{{item.street}}</h1>
+                    </div>
+                    <div class="item">
+                        <h1>{{item.phone}}</h1>
+                    </div>
+                    <div class="item">
+                        <h1>{{item.content.length}}</h1>
+                    </div>
+                    <div class="item">
+                        <h1>{{item.price | currency: '€'}}</h1>
+                    </div>
+                </div>
+                <div class="ordering-items">
+                    <div class="ordering-item" id="title-row">
+                        <div class="item">
+                            <h1>Image</h1>
+                        </div>
+                        <div class="item">
+                            <h1>Name</h1>
+                        </div>
+                        <div class="item">
+                            <h1>Instrument</h1>
+                        </div>
+                        <div class="item">
+                            <h1>Brand</h1>
+                        </div>
+                        <div class="item">
+                            <h1>Price</h1>
+                        </div>
+                    </div>
+                    <div class="ordering-item" ng-repeat="elem in item.content">
+                        <div class="item">
+                            <img ng-src="{{elem.img}}">
+                        </div>
+                        <div class="item">
+                            <h1>{{elem.name}}</h1>
+                        </div>
+                        <div class="item">
+                            <h1>{{elem.instrument}}</h1>
+                        </div>
+                        <div class="item">
+                            <h1>{{elem.brand}}</h1>
+                        </div>
+                        <div class="item">
+                            <h1>{{elem.price | currency: '€'}}</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div>
+<div class="ordering" ng-show="logedAc===''">
+    <h2>You are not logged</h2>
+</div>
