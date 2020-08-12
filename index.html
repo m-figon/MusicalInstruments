@@ -14,6 +14,9 @@
     <ng-include src="'nav-bar.html'"></ng-include>
     <ng-include src="'views/login.html'"></ng-include>
     <ng-include src="'views/register.html'"></ng-include>
+    <div class="loading" ng-show="loading">
+      <img src="imgs/load.gif">
+    </div>
     <main ng-view></main>
   </div>
   <script src="angularjs.js"></script>

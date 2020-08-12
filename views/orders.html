@@ -1,30 +1,37 @@
 <div class="ordering" ng-show="logedAc!==''">
     <div class="ordering-content">
         <div class="ordering-items">
-            <div class="ordering-item" id="title-row">
-                <div class="item">
-                    <h1>Date</h1>
+            
+            <div class="order" ng-show="orders.length>0" ng-repeat="item in orders">
+                <div class="ordering-item" id="title-row">
+                    <div class="item">
+                        <h1>Date</h1>
+                    </div>
+                    <div class="item">
+                        <h1>Email</h1>
+                    </div>
+                    <div class="item">
+                        <h1>City</h1>
+                    </div>
+                    <div class="item">
+                        <h1>Postal Code</h1>
+                    </div>
+                    <div class="item">
+                        <h1>Street</h1>
+                    </div>
+                    <div class="item">
+                        <h1>Home Number</h1>
+                    </div>
+                    <div class="item">
+                        <h1>Phone</h1>
+                    </div>
+                    <div class="item">
+                        <h1>Item Quantity</h1>
+                    </div>
+                    <div class="item">
+                        <h1>Item Price</h1>
+                    </div>
                 </div>
-                <div class="item">
-                    <h1>Email</h1>
-                </div>
-                <div class="item">
-                    <h1>City</h1>
-                </div>
-                <div class="item">
-                    <h1>Street</h1>
-                </div>
-                <div class="item">
-                    <h1>Phone</h1>
-                </div>
-                <div class="item">
-                    <h1>Item Quantity</h1>
-                </div>
-                <div class="item">
-                    <h1>Item Price</h1>
-                </div>
-            </div>
-            <div ng-repeat="item in orders">
                 <div class="ordering-item">
                     <div class="item">
                         <h1>{{item.date}}</h1>
@@ -36,7 +43,13 @@
                         <h1>{{item.city}}</h1>
                     </div>
                     <div class="item">
+                        <h1>{{item.postalCode}}</h1>
+                    </div>
+                    <div class="item">
                         <h1>{{item.street}}</h1>
+                    </div>
+                    <div class="item">
+                        <h1>{{item.homeNumber}}</h1>
                     </div>
                     <div class="item">
                         <h1>{{item.phone}}</h1>
@@ -85,7 +98,9 @@
                     </div>
                 </div>
             </div>
-            
+            <div class="orders" ng-show="orders.length<=0">
+                <h2>There are no orders yet</h2>
+            </div>
         </div>
     </div>
 </div>

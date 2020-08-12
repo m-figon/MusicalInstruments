@@ -1,16 +1,21 @@
-<div class="cart" ng-show="logedAc!==''">
-    <div class="instruments">
-        <div class="instrument" ng-repeat="(key, instrument) in cart">
-          <img ng-src="{{instrument.img}}">
-          <a ng-href="#!/instruments/{{instrumentType}}/{{instrument.id}}"><h1>{{instrument.name}}</h1></a>
-          <div class="one-line">
-            <h2>{{instrument.price | currency: '€'}} </h2>
-            <button ng-click="deleteItem(key)"></button>
-        </div>
-        </div>
+<div class="cart" ng-show="logedAc!=='' && cart.length>0">
+  <div class="instruments">
+    <div class="instrument" ng-repeat="(key, instrument) in cart">
+      <img ng-src="{{instrument.img}}">
+      <a ng-href="#!/instruments/{{instrumentType}}/{{instrument.id}}">
+        <h1>{{instrument.name}}</h1>
+      </a>
+      <div class="one-line">
+        <h2>{{instrument.price | currency: '€'}} </h2>
+        <button ng-click="deleteItem(key)"></button>
       </div>
-      <a href="#!/ordering"><button id="order-button">Make order</button></a>
+    </div>
+  </div>
+  <a href="#!/ordering"><button id="order-button">Make order</button></a>
+</div>
+<div class="cart" ng-show="logedAc!=='' && cart.length<=0">
+  <h2>Cart is empty</h2>
 </div>
 <div class="cart" ng-show="logedAc===''">
-    <h2>You are not logged</h2>
+  <h2>You are not logged</h2>
 </div>

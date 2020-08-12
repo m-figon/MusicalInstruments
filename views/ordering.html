@@ -6,8 +6,12 @@
             <p ng-show="emailP">Invalid email</p>
             <input ng-model="city" ng-focus="focusFunc($event)" ng-blur="blurFunc($event,'City Name')">
             <p ng-show="cityP">Invalid city name</p>
+            <input ng-model="postalCode" ng-focus="focusFunc($event)" ng-blur="blurFunc($event,'Postal Code')">
+            <p ng-show="postalCodeP">Invalid postal code</p>
             <input ng-model="street" ng-focus="focusFunc($event)" ng-blur="blurFunc($event,'Street Name')">
             <p ng-show="streetP">Invalid street name</p>
+            <input ng-model="homeNumber" ng-focus="focusFunc($event)" ng-blur="blurFunc($event,'Home Number')">
+            <p ng-show="homeNumberP">Invalid home number</p>
             <input ng-model="phone" ng-focus="focusFunc($event)" ng-blur="blurFunc($event,'Phone Number')">
             <p ng-show="phoneP">Invalid phone number</p>
             <div class="ordering-line">

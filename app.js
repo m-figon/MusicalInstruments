@@ -34,6 +34,10 @@ app.controller('app-controller', ['$scope', '$http', ($scope, $http) => {
   $scope.cart = null;
   $scope.orders = null;
   $scope.logedUser = null;
+  $scope.loading=true;
+  $scope.$on('$viewContentLoaded', function(){
+    $scope.loading=false;
+  });
   $scope.loginShow = (value) => {
     $scope.login = value;
   }
@@ -57,32 +61,16 @@ app.controller('app-controller', ['$scope', '$http', ($scope, $http) => {
         orders: $scope.logedUser.orders,
         id: $scope.logedUser.id
       }).then(() => {
-        $http.get('https://rocky-citadel-32862.herokuapp.com/MusicalInstruments/users').then((data) => {
-          $scope.users = data.data;
-          let cart;
-          for (let item of $scope.users) {
-            if (item.account === $scope.logedAc) {
-              $scope.logedUser = item;
-              $scope.cart = item.cart;
-              $scope.orders = item.orders;
-              $scope.cartSum = 0;
-              console.log($scope.cart);
-              for (let elem of $scope.cart) {
-                $scope.cartSum += parseFloat(elem.price);
-              }
-            }
-          }
-        })
+        $scope.refreshData();
       })
     })
 
   }
-  $scope.loginFunc = (value) => {
-    $scope.logedAc = value;
+  $scope.refreshData = () => {
     $http.get('https://rocky-citadel-32862.herokuapp.com/MusicalInstruments/users').then((data) => {
-      let users = data.data;
-      console.log(users);
-      for (let item of users) {
+      $scope.users = data.data;
+      let cart;
+      for (let item of $scope.users) {
         if (item.account === $scope.logedAc) {
           $scope.logedUser = item;
           $scope.cart = item.cart;
@@ -95,6 +83,10 @@ app.controller('app-controller', ['$scope', '$http', ($scope, $http) => {
         }
       }
     })
+  }
+  $scope.loginFunc = (value) => {
+    $scope.logedAc = value;
+    $scope.refreshData();
   }
   $scope.addToCart = (value) => {
     console.log(value);
@@ -117,22 +109,7 @@ app.controller('app-controller', ['$scope', '$http', ($scope, $http) => {
         orders: $scope.logedUser.orders,
         id: $scope.logedUser.id
       }).then(() => {
-        $http.get('https://rocky-citadel-32862.herokuapp.com/MusicalInstruments/users').then((data) => {
-          $scope.users = data.data;
-          let cart;
-          for (let item of $scope.users) {
-            if (item.account === $scope.logedAc) {
-              $scope.logedUser = item;
-              $scope.cart = item.cart;
-              $scope.orders = item.orders;
-              $scope.cartSum = 0;
-              console.log($scope.cart);
-              for (let elem of $scope.cart) {
-                $scope.cartSum += parseFloat(elem.price);
-              }
-            }
-          }
-        })
+        $scope.refreshData();
       })
     })
   }
@@ -143,11 +120,13 @@ app.controller('login-controller', ['$scope', '$http', ($scope, $http) => {
   $scope.users = [];
   $scope.account = "Account Name";
   $scope.password = "Password";
+  $scope.loading=true;
   $scope.type = "text";
   $scope.loginP = false;
   $http.get('https://rocky-citadel-32862.herokuapp.com/MusicalInstruments/users').then((data) => {
     $scope.users = data.data;
     console.log($scope.users);
+    $scope.loading=false;
   })
   $scope.focusFunc = (e, condition) => {
     if (e.target.value === "Account Name" || e.target.value === "Password") {
@@ -188,16 +167,21 @@ app.controller('login-controller', ['$scope', '$http', ($scope, $http) => {
 
 app.constant("moment", moment);
 
-app.controller('ordering-controller', ['$scope', '$http','moment', ($scope, $http,moment) => {
+app.controller('ordering-controller', ['$scope', '$http', 'moment', ($scope, $http, moment) => {
   $scope.part = "1";
   $scope.email = "Email Address";
   $scope.city = "City Name";
   $scope.street = "Street Name";
   $scope.phone = "Phone Number";
+  $scope.homeNumber = "Home Number";
+  $scope.postalCode = "Postal Code";
   $scope.emailP = false;
   $scope.cityP = false;
   $scope.streetP = false;
   $scope.phoneP = false;
+  $scope.homeNumberP = false;
+  $scope.postalCodeP = false;
+
   $scope.changingPart = (value) => {
     $scope.part = value;
   }
@@ -216,11 +200,23 @@ app.controller('ordering-controller', ['$scope', '$http','moment', ($scope, $htt
       correctFlag = false;
       $scope.cityP = true;
     }
+    if (!($scope.postalCode.match(/^[0-9/-]{6}$/) === null)) {
+      $scope.postalCodeP = false;
+    } else {
+      correctFlag = false;
+      $scope.postalCodeP = true;
+    }
     if (!($scope.street.match(/^[a-zA-Z0-9\.\-_]{4,15}$/) === null)) {
       $scope.streetP = false;
     } else {
       correctFlag = false;
       $scope.streetP = true;
+    }
+    if (!($scope.homeNumber.match(/^[0-9\/]{1,5}$/) === null)) {
+      $scope.homeNumberP = false;
+    } else {
+      correctFlag = false;
+      $scope.homeNumberP = true;
     }
     if (!($scope.phone.match(/^[0-9]{9}$/) === null)) {
       $scope.phoneP = false;
@@ -241,11 +237,11 @@ app.controller('ordering-controller', ['$scope', '$http','moment', ($scope, $htt
         }
         orders = logedUser.orders.slice();
         let tmpMoment = moment().format('L');
-        let tmpPrice=0;
-        for(let item of $scope.cart){
-          tmpPrice+=parseFloat(item.price);
+        let tmpPrice = 0;
+        for (let item of $scope.cart) {
+          tmpPrice += parseFloat(item.price);
         }
-        orders.push({ date: tmpMoment, email: $scope.email, price: tmpPrice, city: $scope.city, street: $scope.street, phone: $scope.phone, content: $scope.cart });
+        orders.push({ date: tmpMoment, email: $scope.email, price: tmpPrice, city: $scope.city, postalCode: $scope.postalCode, street: $scope.street, homeNumber: $scope.homeNumber, phone: $scope.phone, content: $scope.cart });
         $http.put('https://rocky-citadel-32862.herokuapp.com/MusicalInstruments/users/' + logedUser.id, {
           account: logedUser.account,
           email: logedUser.email,
@@ -253,13 +249,15 @@ app.controller('ordering-controller', ['$scope', '$http','moment', ($scope, $htt
           cart: [],
           orders: orders,
           id: logedUser.id
+        }).then(()=>{
+          $scope.refreshData();
+          alert($scope.logedAc + 'order finished');
         })
       })
-      alert($scope.logedAc + 'order finished');
     }
   }
   $scope.focusFunc = (e) => {
-    if (e.target.value === "Email Address" || e.target.value === "City Name" || e.target.value === "Street Name" || e.target.value === "Phone Number") {
+    if (e.target.value === "Email Address" || e.target.value === "City Name" || e.target.value === "Street Name" || e.target.value === "Phone Number" || e.target.value === "Home Number" || e.target.value === "Postal Code") {
       e.target.value = "";
     }
   }
@@ -363,6 +361,7 @@ app.controller('instruments-controller', ['$scope', '$routeParams', '$http', ($s
   $scope.order = "";
   $scope.type = "none";
   $scope.types = [];
+  $scope.loading=true;
   $scope.tmpInstruments;
   $scope.focusFunc = () => {
     if ($scope.search === 'Search...') {
@@ -430,6 +429,8 @@ app.controller('instruments-controller', ['$scope', '$routeParams', '$http', ($s
     console.log($scope.instruments);
     console.log($scope.types);
     $scope.tmpInstruments = $scope.instruments.slice();
+    $scope.loading=false;
+
   })
 }])
 
@@ -437,6 +438,7 @@ app.controller('instrument-controller', ['$scope', '$routeParams', '$http', ($sc
   $scope.instrumentType = $routeParams.type;
   console.log($scope.instrumentType);
   $scope.instrument = null;
+  $scope.loading=true;
   $http.get('https://rocky-citadel-32862.herokuapp.com/MusicalInstruments/instruments').then((data) => {
     let tmp = data.data;
     console.log(tmp);
@@ -446,5 +448,6 @@ app.controller('instrument-controller', ['$scope', '$routeParams', '$http', ($sc
       }
     }
     console.log($scope.instrument);
+    $scope.loading=false;
   })
 }])
