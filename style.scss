@@ -1,4 +1,4 @@
-@import 'views/account', 'views/details', 'views/home', 'views/instruments', 'views/ordering', 'global';
+@import 'views/account', 'views/details', 'views/home', 'views/instruments', 'views/ordering','views/nav-bar', 'global';
 body{
     margin:0;
     font-family: 'Lato', sans-serif;
@@ -6,55 +6,6 @@ body{
 }
 a{
     text-decoration: none;
-}
-.nav-bar{
-    background-color: black;
-    color:white;
-    width: 100vw;
-    height:4rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-bottom:  3px solid $main-color;
-}
-
-.nav-bar-content{
-    width:60%;
-    height:100%;
-    display: flex;
-}
-.left,.right,.middle{
-    width:33%;
-    height:100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.nav-bar h1:hover{
-    cursor: pointer;
-    text-shadow: 1px 1px 10px $main-color;
-}
-.left h1,
-.middle h1{
-    margin: 0 0.5rem;
-    font-size: 1.2rem;
-}
-.right h1{
-    font-size: 1.2rem;
-}
-.nav-bar .left img{
-    margin-top: 1rem;
-    transform: rotate(-30deg);
-    height:7rem;
-    width:7rem;
-}
-.nav-bar-content a{
-    text-decoration: none;
-    color: white;
-}
-.instruments{
-    display: grid;
-    grid-template-columns: auto auto auto auto auto;
 }
 .main,
 .cart,
@@ -68,8 +19,6 @@ a{
 .cart{
     flex-direction: column;
 }
-
-
 .green-cart{
     width:12rem;
     height:4rem;

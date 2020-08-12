@@ -1,4 +1,5 @@
-.slider {
+.slider,
+.slider2 {
     width: 100vw;
     height: calc(100vh - 4rem);
     display: flex;
@@ -29,5 +30,16 @@
     }
     100% {
         margin-left: 0vw;
+    }
+}
+.slider2{
+    display: none;
+}
+@media only screen and (max-width: 900px) {
+    .slider2{
+        display: flex;
+    }
+    .slider{
+        display: none;
     }
 }

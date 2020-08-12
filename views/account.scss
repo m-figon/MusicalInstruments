@@ -85,3 +85,21 @@
         border-radius: 5px;
     }
 }
+@media only screen and (max-width: 700px) {
+    .register-content,
+    .login-content{
+        width:18rem;
+    }
+    .login-form input,
+    .register-form input{
+        width:90%;
+        font-size: 0.8rem;
+    }
+    .login-form p,
+    .register-form p{
+        font-size: 0.8rem;
+    }
+    .login-form h1{
+        font-size: 0.8rem;
+    }
+}
