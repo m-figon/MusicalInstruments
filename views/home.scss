@@ -1,0 +1,33 @@
+.slider {
+    width: 100vw;
+    height: calc(100vh - 4rem);
+    display: flex;
+    overflow: hidden;
+}
+.imgs {
+    width: 400vw;
+    height: 100%;
+    display: flex;
+    animation: slider 20s infinite;
+    img {
+        width: 100vw;
+        height: 100vh;
+    }
+}
+@keyframes slider {
+    0% {
+        margin-left: 0;
+    }
+    25% {
+        margin-left: -100vw;
+    }
+    50% {
+        margin-left: -200vw;
+    }
+    75% {
+        margin-left: -300vw;
+    }
+    100% {
+        margin-left: 0vw;
+    }
+}

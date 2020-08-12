@@ -1,0 +1,9 @@
+$main-color: #ff7300;
+$second-color: #d63900;
+$inputs-bg: #f0f0f0;
+@mixin flex($justify-content: center, $align-items: center, $flex-direction: row) {
+    display: flex;
+    justify-content: $justify-content;
+    align-items: $align-items;
+    flex-direction: $flex-direction;
+  }

@@ -1,0 +1,87 @@
+@import '../global';
+.login,
+.register {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    @include flex();
+    z-index: 3;
+}
+.login-content,
+.register-content {
+    width: 27rem;
+    background-color: white;
+    border: 0;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    p {
+        margin: 0;
+        margin-bottom: 1rem;
+        color: $second-color;
+    }
+}
+.login-form,
+.register-form {
+    width: 70%;
+    height: 80%;
+    @include flex(flex-start,flex-start,column);
+    input {
+        width: 15rem;
+        height: 1.5rem;
+        background-color: $inputs-bg;
+        border: 1px solid $main-color;
+        margin-bottom: 1rem;
+        border-radius: 5px;
+        padding: 0 0.5rem;
+        &:focus {
+            background-color: white;
+        }
+    }
+    h1 {
+        font-size: 1.2rem;
+        text-decoration: underline;
+        margin-bottom: 1rem;
+        &:hover {
+            cursor: pointer;
+        }
+    }
+    button {
+        width: 4rem;
+        height: 1.7rem;
+        background-color: $main-color;
+        color: white;
+        @include flex();
+        font-size: 1rem;
+        border: 1px solid black;
+        border-radius: 5px;
+        &:hover {
+            cursor: pointer;
+            background-color: $second-color;
+        }
+    }
+}
+.register-form button {
+    width: 5rem;
+    margin-bottom: 2rem;
+}
+.x {
+    margin: 1rem 0;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    button {
+        width: 1.5rem;
+        height: 1.5rem;
+        background-color: $main-color;
+        color: white;
+        @include flex();
+        font-size: 1.2rem;
+        border: 1px solid black;
+        border-radius: 5px;
+    }
+}

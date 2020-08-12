@@ -1,0 +1,90 @@
+.filters-line {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    border-bottom: 3px solid $second-color;
+    h2 {
+        width: auto;
+        font-size: 3rem;
+        margin-right: 2rem;
+    }
+    select,
+    input {
+        background-color: $inputs-bg;
+        width: 10rem;
+        height: 1.5rem;
+        border-radius: 5px;
+        padding:0 0.2rem;
+        border: 1px solid $main-color;
+        margin-right: 2rem;
+        &:focus {
+            background-color: white;
+        }
+    }
+}
+.main-display {
+    width: 70%;
+    @include flex(center,center,column);
+}
+.instrument {
+    width: 13rem;
+    height: 18rem;
+    @include flex(center,center,column);
+    margin: 1rem 1rem;
+    img {
+        height: 10rem;
+        width: 10rem;
+    }
+    h1 {
+        padding: 0 1rem;
+        font-size: 1rem;
+        text-transform: uppercase;
+        color: black;
+        margin: 0;
+        &:hover{
+            text-shadow: 0px 0px 1px $main-color;
+        }
+    }
+    h2 {
+        font-size: 1.4rem;
+        color: green;
+    }
+}
+.one-line {
+    @include flex(flex-start,center,row);
+    width: 100%;
+    button {
+        border: 0;
+        background-color: $main-color;
+        height: 1rem;
+        width: 1rem;
+        clip-path: polygon(
+            20% 0%,
+            0% 20%,
+            30% 50%,
+            0% 80%,
+            20% 100%,
+            50% 70%,
+            80% 100%,
+            100% 80%,
+            70% 50%,
+            100% 20%,
+            80% 0%,
+            50% 30%
+        );
+        &:hover {
+            cursor: pointer;
+        }
+    }
+    h2 {
+        padding: 0 1rem;
+    }
+    img {
+        margin-left: 0.5rem;
+        width: 1.5rem;
+        height: 1.5rem;
+        &:hover {
+            cursor: pointer;
+        }
+    }
+}
