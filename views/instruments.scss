@@ -6,7 +6,7 @@
     h2 {
         width: auto;
         font-size: 3rem;
-        margin:0;
+        margin: 0;
         margin: 1rem 0;
         margin-right: 2rem;
     }
@@ -16,7 +16,7 @@
         width: 10rem;
         height: 1.5rem;
         border-radius: 5px;
-        padding:0 0.2rem;
+        padding: 0 0.2rem;
         border: 1px solid $main-color;
         margin-right: 2rem;
         &:focus {
@@ -25,12 +25,12 @@
     }
 }
 .main-display {
-    @include flex(center,flex-start,column);
+    @include flex(center, flex-start, column);
 }
 .instrument {
     width: 13rem;
     height: 18rem;
-    @include flex(center,center,column);
+    @include flex(center, center, column);
     margin: 1rem 1rem;
     img {
         height: 10rem;
@@ -42,7 +42,7 @@
         text-transform: uppercase;
         color: black;
         margin: 0;
-        &:hover{
+        &:hover {
             text-shadow: 0px 0px 1px $main-color;
         }
     }
@@ -52,7 +52,7 @@
     }
 }
 .one-line {
-    @include flex(flex-start,center,row);
+    @include flex(flex-start, center, row);
     width: 100%;
     button {
         border: 0;
@@ -89,77 +89,85 @@
         }
     }
 }
-.instruments{
+.instruments {
     display: grid;
     grid-template-columns: auto auto auto auto auto;
 }
 @media only screen and (max-width: 1400px) {
-    .instrument{
-        width:10rem;
-        height:12rem;
+    .instrument {
+        width: 10rem;
+        height: 12rem;
+        img {
+            height: auto;
+            width: 8rem;
+        }
+        h1 {
+            font-size: 0.7rem;
+        }
+        h2 {
+            font-size: 1rem;
+        }
     }
-    .instrument img{
-        height:auto;
-        width: 8rem;
+    .filters-line {
+        h2 {
+            font-size: 2rem;
+        }
+        select,
+        input {
+            margin-right: 1rem;
+        }
     }
-    .instrument h1{
-        font-size: 0.7rem;
-    }
-    .instrument h2{
-        font-size: 1rem;
-    }
-    .filters-line h2{
-        font-size: 2rem;
-    }
-    .filters-line select,
-    .filters-line input{
-        margin-right: 1rem;
-    }
-    .one-line img{
-        height:1rem;
-        width:1rem;
+    .one-line {
+        img {
+            height: 1rem;
+            width: 1rem;
+        }
     }
 }
 @media only screen and (max-width: 1100px) {
-    .instruments{
+    .instruments {
         grid-template-columns: auto auto auto auto;
     }
 }
 @media only screen and (max-width: 850px) {
-    .instruments{
+    .instruments {
         grid-template-columns: auto auto auto;
     }
-    .filters-line select,
-    .filters-line input{
-        width:8rem;
+    .filters-line {
+        select,
+        input {
+            width: 8rem;
+        }
     }
 }
 @media only screen and (max-width: 650px) {
-    .instrument{
+    .instrument {
         width: 8rem;
     }
-    .filters-line select,
-    .filters-line input{
-        width:6rem;
-        font-size: 0.8rem;
-    }
-    .filters-line h2{
-        margin-right: 1rem;
+    .filters-line {
+        select,
+        input {
+            width: 6rem;
+            font-size: 0.8rem;
+        }
+        h2 {
+            margin-right: 1rem;
+        }
     }
 }
 @media only screen and (max-width: 510px) {
-    .instruments{
+    .instruments {
         grid-template-columns: auto auto;
     }
-    .filters-line{
+    .filters-line {
         flex-direction: column;
         align-items: center;
-        width:100%;
+        width: 100%;
         border: 0;
-    }
-    .filters-line select,
-    .filters-line input{
-        margin: 0.5rem 0;
-        width:8rem;
+        select,
+        input {
+            margin: 0.5rem 0;
+            width: 8rem;
+        }
     }
 }

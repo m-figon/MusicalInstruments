@@ -34,9 +34,9 @@ app.controller('app-controller', ['$scope', '$http', ($scope, $http) => {
   $scope.cart = null;
   $scope.orders = null;
   $scope.logedUser = null;
-  $scope.loading=true;
-  $scope.$on('$viewContentLoaded', function(){
-    $scope.loading=false;
+  $scope.loading = true;
+  $scope.$on('$viewContentLoaded', function () {
+    $scope.loading = false;
   });
   $scope.loginShow = (value) => {
     $scope.login = value;
@@ -118,15 +118,18 @@ app.controller('app-controller', ['$scope', '$http', ($scope, $http) => {
 
 app.controller('login-controller', ['$scope', '$http', ($scope, $http) => {
   $scope.users = [];
-  $scope.account = "Account Name";
-  $scope.password = "Password";
-  $scope.loading=true;
-  $scope.type = "text";
-  $scope.loginP = false;
+  $scope.loading = true;
+  $scope.loginInit = () => {
+    $scope.account = "Account Name";
+    $scope.password = "Password";
+    $scope.type = "text";
+    $scope.loginP = false;
+  }
+  $scope.loginInit();
   $http.get('https://rocky-citadel-32862.herokuapp.com/MusicalInstruments/users').then((data) => {
     $scope.users = data.data;
     console.log($scope.users);
-    $scope.loading=false;
+    $scope.loading = false;
   })
   $scope.focusFunc = (e, condition) => {
     if (e.target.value === "Account Name" || e.target.value === "Password") {
@@ -148,13 +151,11 @@ app.controller('login-controller', ['$scope', '$http', ($scope, $http) => {
     let correctFlag = false;
     for (let item of $scope.users) {
       if (item.account === $scope.account && item.password === $scope.password) {
-        $scope.loginP = false;
         $scope.loginFunc($scope.account);
         console.log($scope.logedAc);
         correctFlag = true;
-        $scope.account = "Account Name";
-        $scope.password = "Password";
-        $scope.type = "text";
+        $scope.loginInit();
+        $scope.loginShow(false);
         alert('correct user data');
       }
     }
@@ -185,44 +186,23 @@ app.controller('ordering-controller', ['$scope', '$http', 'moment', ($scope, $ht
   $scope.changingPart = (value) => {
     $scope.part = value;
   }
+
+  $scope.ifFunc = (condition, p) => {
+    if (condition) {
+      eval(p + " = false");
+      return true;
+    } else {
+      eval(p + " = true");
+      return false;
+    }
+  }
   $scope.finishOrder = () => {
     let correctFlag = true;
-    if (!($scope.email.match(/^[a-z0-9\._\-]+@[a-z0-9\.\-]+\.[a-z]{2,4}$/) ===
-      null)) {
-      $scope.emailP = false;
-    } else {
-      correctFlag = false;
-      $scope.emailP = true;
-    }
-    if (!($scope.city.match(/^[a-zA-Z0-9\.\-_]{4,15}$/) === null)) {
-      $scope.cityP = false;
-    } else {
-      correctFlag = false;
-      $scope.cityP = true;
-    }
-    if (!($scope.postalCode.match(/^[0-9/-]{6}$/) === null)) {
-      $scope.postalCodeP = false;
-    } else {
-      correctFlag = false;
-      $scope.postalCodeP = true;
-    }
-    if (!($scope.street.match(/^[a-zA-Z0-9\.\-_]{4,15}$/) === null)) {
-      $scope.streetP = false;
-    } else {
-      correctFlag = false;
-      $scope.streetP = true;
-    }
-    if (!($scope.homeNumber.match(/^[0-9\/]{1,5}$/) === null)) {
-      $scope.homeNumberP = false;
-    } else {
-      correctFlag = false;
-      $scope.homeNumberP = true;
-    }
-    if (!($scope.phone.match(/^[0-9]{9}$/) === null)) {
-      $scope.phoneP = false;
-    } else {
-      correctFlag = false;
-      $scope.phoneP = true;
+    let matchingValues = [!($scope.email.match(/^[a-z0-9\._\-]+@[a-z0-9\.\-]+\.[a-z]{2,4}$/) ===
+      null), !($scope.city.match(/^[a-zA-Z0-9\.\-_]{4,15}$/) === null), !($scope.postalCode.match(/^[0-9/-]{6}$/) === null), !($scope.street.match(/^[a-zA-Z0-9\.\-_]{4,15}$/) === null), !($scope.homeNumber.match(/^[0-9\/]{1,5}$/) === null), !($scope.phone.match(/^[0-9]{9}$/) === null)];
+    let pValues = ['$scope.emailP', '$scope.cityP', '$scope.postalCodeP', '$scope.streetP', '$scope.homeNumberP', '$scope.phoneP'];
+    for (let i = 0; i < matchingValues.length; i++) {
+      correctFlag = $scope.ifFunc(matchingValues[i], pValues[i]);
     }
     if (correctFlag) {
       let logedUser;
@@ -249,7 +229,7 @@ app.controller('ordering-controller', ['$scope', '$http', 'moment', ($scope, $ht
           cart: [],
           orders: orders,
           id: logedUser.id
-        }).then(()=>{
+        }).then(() => {
           $scope.refreshData();
           alert($scope.logedAc + 'order finished');
         })
@@ -269,16 +249,19 @@ app.controller('ordering-controller', ['$scope', '$http', 'moment', ($scope, $ht
 }])
 
 app.controller('register-controller', ['$scope', '$http', ($scope, $http) => {
-  $scope.account = "Account Name";
-  $scope.email = "Email Address";
-  $scope.password1 = "Password";
-  $scope.password2 = "Confirm Password";
-  $scope.type1 = "text";
-  $scope.type2 = "text";
-  $scope.accountP = false;
-  $scope.emailP = false;
-  $scope.password1P = false;
-  $scope.password2P = false;
+  $scope.registerInit = () => {
+    $scope.account = "Account Name";
+    $scope.email = "Email Address";
+    $scope.password1 = "Password";
+    $scope.password2 = "Confirm Password";
+    $scope.type1 = "text";
+    $scope.type2 = "text";
+    $scope.accountP = false;
+    $scope.emailP = false;
+    $scope.password1P = false;
+    $scope.password2P = false;
+  }
+  $scope.registerInit();
   $scope.focusFunc = (e, condition) => {
     if (e.target.value === "Account Name" || e.target.value === "Password" || e.target.value === "Email Address" || e.target.value === "Confirm Password") {
       e.target.value = "";
@@ -299,39 +282,29 @@ app.controller('register-controller', ['$scope', '$http', ($scope, $http) => {
       }
     }
   }
+  $scope.ifFunc = (condition, p) => {
+    if (condition) {
+      eval(p + " = false");
+      return true;
+    } else {
+      eval(p + " = true");
+      return false;
+    }
+  }
   $scope.signUp = () => {
     let correctFlag = true;
-    if (!($scope.account.match(/^[a-zA-Z0-9\.\-_]{4,10}$/) === null)) {
-      $scope.accountP = false;
-    } else {
-      correctFlag = false;
-      $scope.accountP = true;
-    }
-    if (!($scope.email.match(/^[a-z0-9\._\-]+@[a-z0-9\.\-]+\.[a-z]{2,4}$/) ===
-      null)) {
-      $scope.emailP = false;
-    } else {
-      correctFlag = false;
-      $scope.emailP = true;
-    }
-    if (!($scope.password1.match(
-      /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[\.\-_@$!%*#?&])[A-Za-z\d\.\-_@$!%*#?&]{8,13}$/
-    ) === null)) {
-      $scope.password1P = false;
-    } else {
-      correctFlag = false;
-      $scope.password1P = true;
-    }
-    if ($scope.password1 === $scope.password2 &&
-      !(
-        $scope.password1.match(
-          /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[\.\-_@$!%*#?&])[A-Za-z\d\.\-_@$!%*#?&]{8,13}$/
-        ) === null
-      )) {
-      $scope.password2P = false;
-    } else {
-      correctFlag = false;
-      $scope.password2P = true;
+    let matchingValues = [!($scope.account.match(/^[a-zA-Z0-9\.\-_]{4,10}$/) === null), !($scope.email.match(/^[a-z0-9\._\-]+@[a-z0-9\.\-]+\.[a-z]{2,4}$/) ===
+      null), !($scope.password1.match(
+        /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[\.\-_@$!%*#?&])[A-Za-z\d\.\-_@$!%*#?&]{8,13}$/
+      ) === null), $scope.password1 === $scope.password2 &&
+    !(
+      $scope.password1.match(
+        /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[\.\-_@$!%*#?&])[A-Za-z\d\.\-_@$!%*#?&]{8,13}$/
+      ) === null
+    )];
+    let pValues = ['$scope.accountP', '$scope.emailP', '$scope.password1P', '$scope.password2P'];
+    for (let i = 0; i < matchingValues.length; i++) {
+      correctFlag = $scope.ifFunc(matchingValues[i], pValues[i]);
     }
     if (correctFlag) {
       $http.post('https://rocky-citadel-32862.herokuapp.com/MusicalInstruments/users', {
@@ -342,12 +315,7 @@ app.controller('register-controller', ['$scope', '$http', ($scope, $http) => {
         orders: []
       }).then(() => {
         alert('user created');
-        $scope.account = "Account Name";
-        $scope.email = "Email Address";
-        $scope.password1 = "Password";
-        $scope.password2 = "Confirm Password";
-        $scope.type1 = "text";
-        $scope.type2 = "text";
+        $scope.registerInit();
       })
     }
   }
@@ -361,7 +329,7 @@ app.controller('instruments-controller', ['$scope', '$routeParams', '$http', ($s
   $scope.order = "";
   $scope.type = "none";
   $scope.types = [];
-  $scope.loading=true;
+  $scope.loading = true;
   $scope.tmpInstruments;
   $scope.focusFunc = () => {
     if ($scope.search === 'Search...') {
@@ -374,26 +342,16 @@ app.controller('instruments-controller', ['$scope', '$routeParams', '$http', ($s
     }
   };
   $scope.selectFunc = () => {
-    if ($scope.filter === 'none') {
-      console.log('none');
-      $scope.order = "";
-    } else if ($scope.filter === 'a-z') {
-      console.log('a-z');
-      $scope.order = "name";
-    } else if ($scope.filter === 'z-a') {
-      console.log('z-a');
-      $scope.order = "-name";
-    } else if ($scope.filter === 'inc') {
-      console.log('inc');
-      $scope.order = "price";
-    } else if ($scope.filter === 'dec') {
-      console.log('dec');
-      $scope.order = "-price";
+    switch ($scope.filter) {
+      case 'none': $scope.order = ""; break;
+      case 'a-z': $scope.order = "name"; break;
+      case 'z-a': $scope.order = "-name"; break;
+      case 'inc': $scope.order = "price"; break;
+      case 'dec': $scope.order = "-price"; break;
     }
   };
   $scope.typeFunc = () => {
     if ($scope.type === 'none') {
-      console.log('none');
       $scope.instruments = $scope.tmpInstruments.slice();
     }
     for (let elem of $scope.types) {
@@ -426,11 +384,8 @@ app.controller('instruments-controller', ['$scope', '$routeParams', '$http', ($s
         }
       }
     }
-    console.log($scope.instruments);
-    console.log($scope.types);
     $scope.tmpInstruments = $scope.instruments.slice();
-    $scope.loading=false;
-
+    $scope.loading = false;
   })
 }])
 
@@ -438,7 +393,7 @@ app.controller('instrument-controller', ['$scope', '$routeParams', '$http', ($sc
   $scope.instrumentType = $routeParams.type;
   console.log($scope.instrumentType);
   $scope.instrument = null;
-  $scope.loading=true;
+  $scope.loading = true;
   $http.get('https://rocky-citadel-32862.herokuapp.com/MusicalInstruments/instruments').then((data) => {
     let tmp = data.data;
     console.log(tmp);
@@ -448,6 +403,6 @@ app.controller('instrument-controller', ['$scope', '$routeParams', '$http', ($sc
       }
     }
     console.log($scope.instrument);
-    $scope.loading=false;
+    $scope.loading = false;
   })
 }])

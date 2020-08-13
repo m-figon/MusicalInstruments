@@ -1,4 +1,4 @@
-@import '../global';
+@import "../global";
 .login,
 .register {
     position: absolute;
@@ -29,7 +29,7 @@
 .register-form {
     width: 70%;
     height: 80%;
-    @include flex(flex-start,flex-start,column);
+    @include flex(flex-start, flex-start, column);
     input {
         width: 15rem;
         height: 1.5rem;
@@ -65,9 +65,11 @@
         }
     }
 }
-.register-form button {
-    width: 5rem;
-    margin-bottom: 2rem;
+.register-form{
+    button {
+        width: 5rem;
+        margin-bottom: 2rem;
+    }
 }
 .x {
     margin: 1rem 0;
@@ -87,19 +89,22 @@
 }
 @media only screen and (max-width: 700px) {
     .register-content,
-    .login-content{
-        width:18rem;
+    .login-content {
+        width: 18rem;
     }
-    .login-form input,
-    .register-form input{
-        width:90%;
-        font-size: 0.8rem;
+    .login-form,
+    .register-form {
+        input {
+            width: 90%;
+            font-size: 0.8rem;
+        }
+        p {
+            font-size: 0.8rem;
+        }
     }
-    .login-form p,
-    .register-form p{
-        font-size: 0.8rem;
-    }
-    .login-form h1{
-        font-size: 0.8rem;
+    .login-form{
+        h1 {
+            font-size: 0.8rem;
+        }
     }
 }
