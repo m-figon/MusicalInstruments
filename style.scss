@@ -8,8 +8,7 @@ a{
     text-decoration: none;
 }
 .main,
-.cart,
-.ordering{
+.cart{
     width:100vw;
     display: flex;
     align-items: center;
@@ -19,42 +18,7 @@ a{
 .cart{
     flex-direction: column;
 }
-.green-cart{
-    width:12rem;
-    height:4rem;
-    display: flex;
-    align-items: center;
-    padding: 0 2rem;
-    background-color: #679d00;
-}
-.green-cart img{
-    height:2rem;
-    width: 2rem;
-    margin-right: 1rem;
-    -webkit-filter: invert(100%); /* Safari/Chrome */
-    filter: invert(100%);
-}
-.green-cart h1{
-    color:white;
-    font-size: 1rem;
-}
-.line .price-left{
-    flex-direction: row;
-}
-.price-left h1{
-    font-size: 1.2rem;
-    color: green;
-    text-transform: lowercase;
-}
-.price-left h2{
-    margin-left: 0.5rem;
-    font-size: 2rem;
-    color:green;
-    width: auto;
-}
-.green-cart:hover{
-    cursor: pointer;
-}
+
 .loading{
     top:0;
     left:0;

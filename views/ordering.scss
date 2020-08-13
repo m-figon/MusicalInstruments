@@ -1,3 +1,10 @@
+.ordering{
+    width:100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 2rem;
+}
 .ordering-content {
     background-color: white;
     border: 0;
@@ -6,7 +13,7 @@
     width: auto;
 }
 .ordering-form {
-    width: 70%;
+    width: 100%;
     height: 80%;
     @include flex(flex-start,flex-start,column);
     input {
@@ -61,7 +68,8 @@
         margin-top: 1rem;
     }
 }
-.ordering-line {
+.ordering-line,
+.ordering-line2{
     display: flex;
     width: 100%;
     .left-side,
@@ -131,4 +139,46 @@
 }
 .order {
     margin-top: 1rem;
+}
+
+@media only screen and (max-width: 1400px) {
+    .ordering-item,
+    .ordering-items,
+    .ordering-line{
+        width:40rem;
+    }
+    .ordering-item{
+        height:3.5rem;
+    }
+    .ordering p{
+        margin: 0.5rem 0;
+    }
+    .ordering h2{
+        margin: 0;
+    }
+    .ordering-line2{
+        margin: -0.8rem 0;
+    }
+}
+@media only screen and (max-width: 800px) {
+    .ordering-item,
+    .ordering-items,
+    .ordering-line{
+        width:30rem;
+    }
+    .ordering-item .item h1,
+    .ordering-items .item h1{
+        font-size: 0.7rem;
+    }
+}
+@media only screen and (max-width: 600px) {
+    .ordering-item,
+    .ordering-items,
+    .ordering-line{
+        width:20rem;
+    }
+    .ordering-item .item h1,
+    .ordering-items .item h1{
+        font-size: 0.6rem;
+    }
 }
