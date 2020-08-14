@@ -1,24 +1,24 @@
-# Movie Theater
+# Musial Instruments
 
-Goal of this project was creating a movie theater website which allows user to search for movie, view details information about it, order seats for specific hour, view user's orders.
+Goal of this project was creating a music shop website which allows user to search for an instrument, view details information about it, order it, view user's orders.
 
-To sign in use account 'testUser' and password: 'TestUser.123' (login allows to order ticket for a movie, view orders)
+To sign in use account 'testUser' and password: 'TestUser.123' (login allows to order add instrument to cart and to order it)
 
 ## Used frameworks, languages
 
-* Vue
+* AngularJS
 
 * JavaScript
 
 * HTML & CSS
 
-* Less
+* Sass
 
-* VueYoutube
+* moment.js
 
 ## Netlify app link
 
-https://movie-theater-mfigon.netlify.app
+https://musical-instruments-mfigon.netlify.app
 
 ## Netlify portfolio link
 
