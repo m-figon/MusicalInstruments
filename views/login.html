@@ -4,9 +4,11 @@
             <div class="x">
                 <button ng-click="loginShow(false)">X</button>
             </div>
-            <input ng-model="account" ng-focus="focusFunc($event,false)" ng-blur="blurFunc($event,false,'Account Name')">
+            <input ng-model="account" ng-focus="focusFunc($event,false)"
+                ng-blur="blurFunc($event,false,'Account Name')">
             <p ng-show="loginP">Invalid user data</p>
-            <input ng-model="password" ng-focus="focusFunc($event,true)"  type="{{type}}" ng-blur="blurFunc($event,true,'Password')">
+            <input ng-model="password" ng-focus="focusFunc($event,true)" type="{{type}}"
+                ng-blur="blurFunc($event,true,'Password')">
             <button ng-click="signIn()">Login</button>
             <h1 ng-click="loginShow(false); registerShow(true)">Don't have an account? create it!</h1>
         </div>

@@ -183,6 +183,15 @@
   height: 25rem;
 }
 
+#underline {
+  text-decoration: underline;
+  margin-left: 0.5rem;
+}
+
+#underline:hover {
+  cursor: pointer;
+}
+
 .green-cart {
   width: 12rem;
   height: 4rem;
@@ -190,6 +199,10 @@
   align-items: center;
   padding: 0 2rem;
   background-color: #679d00;
+}
+.green-cart .line {
+  display: flex;
+  align-items: center;
 }
 .green-cart img {
   height: 2rem;
@@ -423,6 +436,14 @@
   grid-template-columns: auto auto auto auto auto;
 }
 
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
 @media only screen and (max-width: 1400px) {
   .instrument {
     width: 10rem;

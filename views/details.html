@@ -22,11 +22,20 @@
                 <h2>{{instrument.price | currency: '€'}} </h2>
             </div>
             <div class="right">
-                <div ng-click="addToCart(instrument)" ng-show="logedAc!==''" class="green-cart">
+                <div ng-click="addToCart(instrument,null)" ng-show="logedAc!==''" class="green-cart">
                     <img src="cart.png">
                     <h1>Add to cart</h1>
+                </div>
+                <div ng-show="logedAc===''" class="green-cart" ng-click="loginShow(true)">
+                    <div class="line">
+                        <h1>To add item</h1>
+                        <h1 id="underline">sign in</h1>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+    <div class="loading" ng-show="detailsLoading">
+        <img src="imgs/load.gif">
+      </div>
   </div>

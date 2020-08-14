@@ -35,6 +35,11 @@ app.controller('app-controller', ['$scope', '$http', ($scope, $http) => {
   $scope.orders = null;
   $scope.logedUser = null;
   $scope.loading = true;
+  $scope.users = [];
+  $http.get('https://rocky-citadel-32862.herokuapp.com/MusicalInstruments/users').then((data) => {
+    $scope.users = data.data;
+    console.log($scope.users);
+  })
   $scope.$on('$viewContentLoaded', function () {
     $scope.loading = false;
   });
@@ -88,7 +93,7 @@ app.controller('app-controller', ['$scope', '$http', ($scope, $http) => {
     $scope.logedAc = value;
     $scope.refreshData();
   }
-  $scope.addToCart = (value) => {
+  $scope.addToCart = (value, e) => {
     console.log(value);
     $http.get('https://rocky-citadel-32862.herokuapp.com/MusicalInstruments/users').then((data) => {
       $scope.users = data.data;
@@ -110,6 +115,9 @@ app.controller('app-controller', ['$scope', '$http', ($scope, $http) => {
         id: $scope.logedUser.id
       }).then(() => {
         $scope.refreshData();
+        if (e) {
+          e.target.style.animation = "rotate 3s";
+        }
       })
     })
   }
@@ -117,8 +125,6 @@ app.controller('app-controller', ['$scope', '$http', ($scope, $http) => {
 
 
 app.controller('login-controller', ['$scope', '$http', ($scope, $http) => {
-  $scope.users = [];
-  $scope.loading = true;
   $scope.loginInit = () => {
     $scope.account = "Account Name";
     $scope.password = "Password";
@@ -126,11 +132,6 @@ app.controller('login-controller', ['$scope', '$http', ($scope, $http) => {
     $scope.loginP = false;
   }
   $scope.loginInit();
-  $http.get('https://rocky-citadel-32862.herokuapp.com/MusicalInstruments/users').then((data) => {
-    $scope.users = data.data;
-    console.log($scope.users);
-    $scope.loading = false;
-  })
   $scope.focusFunc = (e, condition) => {
     if (e.target.value === "Account Name" || e.target.value === "Password") {
       e.target.value = "";
@@ -323,13 +324,13 @@ app.controller('register-controller', ['$scope', '$http', ($scope, $http) => {
 
 app.controller('instruments-controller', ['$scope', '$routeParams', '$http', ($scope, $routeParams, $http) => {
   $scope.instrumentType = $routeParams.type;
+  $scope.instrumentsLoading = true;
   console.log($scope.instrumentType);
   $scope.filter = "none";
   $scope.search = "Search...";
   $scope.order = "";
   $scope.type = "none";
   $scope.types = [];
-  $scope.loading = true;
   $scope.tmpInstruments;
   $scope.focusFunc = () => {
     if ($scope.search === 'Search...') {
@@ -385,15 +386,15 @@ app.controller('instruments-controller', ['$scope', '$routeParams', '$http', ($s
       }
     }
     $scope.tmpInstruments = $scope.instruments.slice();
-    $scope.loading = false;
+    $scope.instrumentsLoading = false;
   })
 }])
 
 app.controller('instrument-controller', ['$scope', '$routeParams', '$http', ($scope, $routeParams, $http) => {
+  $scope.detailsLoading = true;
   $scope.instrumentType = $routeParams.type;
   console.log($scope.instrumentType);
   $scope.instrument = null;
-  $scope.loading = true;
   $http.get('https://rocky-citadel-32862.herokuapp.com/MusicalInstruments/instruments').then((data) => {
     let tmp = data.data;
     console.log(tmp);
@@ -403,6 +404,6 @@ app.controller('instrument-controller', ['$scope', '$routeParams', '$http', ($sc
       }
     }
     console.log($scope.instrument);
-    $scope.loading = false;
+    $scope.detailsLoading = false;
   })
 }])

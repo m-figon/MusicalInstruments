@@ -43,6 +43,13 @@
         }
     }
 }
+#underline{
+    text-decoration: underline;
+    margin-left: 0.5rem;
+}
+#underline:hover{
+    cursor: pointer;
+}
 .green-cart {
     width: 12rem;
     height: 4rem;
@@ -50,6 +57,10 @@
     align-items: center;
     padding: 0 2rem;
     background-color: #679d00;
+    .line{
+        display: flex;
+        align-items: center;
+    }
     img {
         height: 2rem;
         width: 2rem;

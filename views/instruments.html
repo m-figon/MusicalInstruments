@@ -1,34 +1,39 @@
-
-  <div class="app" ng-controller="instruments-controller">
-    <div class="main">
-      <div class="main-display">
-        <div class="filters-line">
-          <h2>{{instrumentType}}</h2>
-          <select ng-model="filter" ng-change="selectFunc()">
-            <option value="none">Sort by</option>
-            <option value="a-z">Name A-Z</option>
-            <option value="z-a">Name Z-A</option>
-            <option value="inc">Price increasing</option>
-            <option value="dec">Price decreasing</option>
-          </select>
-          <select ng-model="type" ng-change="typeFunc()">
-            <option value="none">Type</option>
-            <option ng-repeat="type in types" ng-value="type">
-              {{type}}
-            </option>
-          </select>
-          <input ng-focus="focusFunc()" ng-blur="blurFunc()" ng-model="search">
-        </div>
-        <div class="instruments">
-          <div class="instrument" ng-repeat="instrument in instruments | orderBy:order" ng-show="(instrument.name.toLowerCase().includes(search.toLowerCase()) || search==='Search...')">
-            <img ng-src="{{instrument.img}}">
-            <a ng-href="#!/instruments/{{instrumentType}}/{{instrument.id}}"><h1>{{instrument.name}}</h1></a>
-            <div class="one-line">
-              <h2>{{instrument.price | currency: '€'}} </h2>
-              <img ng-show="logedAc!==''" ng-click="addToCart(instrument)" src="cart.png">
-            </div>
+<div class="app" ng-controller="instruments-controller">
+  <div class="main">
+    <div class="main-display">
+      <div class="filters-line">
+        <h2>{{instrumentType}}</h2>
+        <select ng-model="filter" ng-change="selectFunc()">
+          <option value="none">Sort by</option>
+          <option value="a-z">Name A-Z</option>
+          <option value="z-a">Name Z-A</option>
+          <option value="inc">Price increasing</option>
+          <option value="dec">Price decreasing</option>
+        </select>
+        <select ng-model="type" ng-change="typeFunc()">
+          <option value="none">Type</option>
+          <option ng-repeat="type in types" ng-value="type">
+            {{type}}
+          </option>
+        </select>
+        <input ng-focus="focusFunc()" ng-blur="blurFunc()" ng-model="search">
+      </div>
+      <div class="instruments">
+        <div class="instrument" ng-repeat="instrument in instruments | orderBy:order"
+          ng-show="(instrument.name.toLowerCase().includes(search.toLowerCase()) || search==='Search...')">
+          <img ng-src="{{instrument.img}}">
+          <a ng-href="#!/instruments/{{instrumentType}}/{{instrument.id}}">
+            <h1>{{instrument.name}}</h1>
+          </a>
+          <div class="one-line">
+            <h2>{{instrument.price | currency: '€'}} </h2>
+            <img ng-show="logedAc!==''" ng-click="addToCart(instrument,$event)" src="cart.png">
           </div>
         </div>
       </div>
     </div>
   </div>
+  <div class="loading" ng-show="instrumentsLoading">
+    <img src="imgs/load.gif">
+  </div>
+</div>

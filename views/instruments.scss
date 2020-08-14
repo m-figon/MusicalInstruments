@@ -93,6 +93,14 @@
     display: grid;
     grid-template-columns: auto auto auto auto auto;
 }
+@keyframes rotate {
+    0% {
+       transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
 @media only screen and (max-width: 1400px) {
     .instrument {
         width: 10rem;
