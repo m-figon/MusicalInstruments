@@ -75,6 +75,7 @@ app.controller('app-controller', ['$scope', '$http', ($scope, $http) => {
     $http.get('https://rocky-citadel-32862.herokuapp.com/MusicalInstruments/users').then((data) => {
       $scope.users = data.data;
       let cart;
+      console.log($scope.users);
       for (let item of $scope.users) {
         if (item.account === $scope.logedAc) {
           $scope.logedUser = item;
@@ -315,8 +316,9 @@ app.controller('register-controller', ['$scope', '$http', ($scope, $http) => {
         cart: [],
         orders: []
       }).then(() => {
-        alert('user created');
         $scope.registerInit();
+        $scope.refreshData();
+        alert('user created');
       })
     }
   }

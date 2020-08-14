@@ -4,13 +4,13 @@
             <div class="x">
                 <button ng-click="registerShow(false)">X</button>
             </div>
-            <input ng-model="account" ng-focus="focusFunc($event,0)" ng-blur="blurFunc($event,false,'Account Name')">
+            <input autocomplete="new-password" ng-model="account" ng-focus="focusFunc($event,0)" ng-blur="blurFunc($event,false,'Account Name')">
             <p ng-show="accountP">Account must consist of 3-12 letters or digits</p>
-            <input ng-model="email" ng-focus="focusFunc($event,0)" ng-blur="blurFunc($event,false,'Email Address')">
+            <input autocomplete="new-password" ng-model="email" ng-focus="focusFunc($event,0)" ng-blur="blurFunc($event,false,'Email Address')">
             <p ng-show="emailP">Please enter correct email</p>
-            <input ng-model="password1" ng-focus="focusFunc($event,1)"  type="{{type1}}" ng-blur="blurFunc($event,1,'Password')">
+            <input autocomplete="new-password" ng-model="password1" ng-focus="focusFunc($event,1)"  type="{{type1}}" ng-blur="blurFunc($event,1,'Password')">
             <p ng-show="password1P">Password must consist of 3-12 letters and digits, at least one upper and lowercase letter, special character</p>
-            <input ng-model="password2" ng-focus="focusFunc($event,2)"  type="{{type2}}" ng-blur="blurFunc($event,2,'Confirm Password')">
+            <input autocomplete="new-password" ng-model="password2" ng-focus="focusFunc($event,2)"  type="{{type2}}" ng-blur="blurFunc($event,2,'Confirm Password')">
             <p ng-show="password2P">Must be same as entered password and password must be correct</p>
             <button ng-click="signUp()">Register</button>
         </div>
