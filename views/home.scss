@@ -9,7 +9,15 @@
     width: 400vw;
     height: 100%;
     display: flex;
-    animation: slider 20s infinite;
+    animation: slider 20s infinite, fadeIn 1s;
+        @-webkit-keyframes fadeIn {
+        0% {opacity: 0;}
+        100% {opacity: 1;}
+        }
+        @keyframes fadeIn {
+        0% {opacity: 0;}
+        100% {opacity: 1;}
+        } 
     img {
         width: 100vw;
         height: 100vh;

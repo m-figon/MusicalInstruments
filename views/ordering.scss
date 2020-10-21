@@ -39,6 +39,7 @@
     font-size: 1rem;
     border: 1px solid black;
     border-radius: 5px;
+    transition: background-color 500ms;
     &:hover {
         cursor: pointer;
         background-color: $second-color;

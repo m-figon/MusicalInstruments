@@ -40,6 +40,15 @@
         img {
             width: 25rem;
             height: 25rem;
+            animation: fadeIn 1s;
+        @-webkit-keyframes fadeIn {
+        0% {opacity: 0;}
+        100% {opacity: 1;}
+        }
+        @keyframes fadeIn {
+        0% {opacity: 0;}
+        100% {opacity: 1;}
+        } 
         }
     }
 }

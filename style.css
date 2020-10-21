@@ -22,6 +22,40 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  -webkit-animation-name: pulse;
+  animation-name: pulse;
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+@-webkit-keyframes pulse {
+  0% {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
+  50% {
+    -webkit-transform: scale3d(1.05, 1.05, 1.05);
+    transform: scale3d(1.05, 1.05, 1.05);
+  }
+  100% {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
+}
+@keyframes pulse {
+  0% {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
+  50% {
+    -webkit-transform: scale3d(1.05, 1.05, 1.05);
+    transform: scale3d(1.05, 1.05, 1.05);
+  }
+  100% {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
 }
 .login-content p,
 .register-content p {
@@ -76,6 +110,7 @@
   font-size: 1rem;
   border: 1px solid black;
   border-radius: 5px;
+  transition: background-color 500ms;
 }
 .login-form button:hover,
 .register-form button:hover {
@@ -181,6 +216,23 @@
 .line .left img {
   width: 25rem;
   height: 25rem;
+  animation: fadeIn 1s;
+}
+@-webkit-keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 #underline {
@@ -302,7 +354,23 @@
   width: 400vw;
   height: 100%;
   display: flex;
-  animation: slider 20s infinite;
+  animation: slider 20s infinite, fadeIn 1s;
+}
+@-webkit-keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 .imgs img {
   width: 100vw;
@@ -386,6 +454,23 @@
 .instrument img {
   height: 10rem;
   width: 10rem;
+  animation: fadeIn 1s;
+}
+@-webkit-keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 .instrument h1 {
   padding: 0 1rem;
@@ -393,6 +478,7 @@
   text-transform: uppercase;
   color: black;
   margin: 0;
+  transition: text-shadow 500ms;
 }
 .instrument h1:hover {
   text-shadow: 0px 0px 1px #ff7300;
@@ -572,6 +658,7 @@
   font-size: 1rem;
   border: 1px solid black;
   border-radius: 5px;
+  transition: background-color 500ms;
 }
 #order-button:hover,
 .ordering button:hover {
@@ -733,6 +820,7 @@
   justify-content: center;
   align-items: center;
   border-bottom: 3px solid #ff7300;
+  transition: text-shadow 500ms;
 }
 .nav-bar h1:hover {
   cursor: pointer;
